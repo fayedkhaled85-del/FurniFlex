@@ -55,7 +55,5 @@ Docker Compose derives its project name from the repository folder. Use a fresh 
 
 `.env` contains local database passwords and is ignored by Git. Never commit `.env`, database backups, uploaded files, logs, or real user data. The first database initialization imports `FurniFlex-Schema.sql`; MariaDB only imports initialization files when creating a new data volume. Changing the schema file does not modify an existing database volume.
 
-## Security
 
-Use fictional data for development. Keep production credentials, database backups, reset links, and user uploads outside this repository. Review changes before committing.
 
