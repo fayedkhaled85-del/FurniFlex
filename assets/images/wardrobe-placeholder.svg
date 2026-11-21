@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="t d">
+  <title id="t">Wardrobe placeholder</title><desc id="d">Neutral illustration of a two-door wardrobe with drawer fronts and short feet.</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#f5efe6"/><stop offset="1" stop-color="#e9dfd2"/></linearGradient><linearGradient id="wood" x2="1"><stop stop-color="#987255"/><stop offset="1" stop-color="#79583f"/></linearGradient></defs>
+  <rect width="640" height="420" rx="28" fill="url(#bg)"/><ellipse cx="320" cy="354" rx="150" ry="18" fill="#6f5742" opacity=".14"/>
+  <path d="M181 82h278v250H181z" fill="url(#wood)" stroke="#614631" stroke-width="9"/>
+  <path d="M198 98h116v169H198zM326 98h116v169H326z" fill="#b18a66" stroke="#684c35" stroke-width="6"/>
+  <path d="M208 109h96v147h-96zM336 109h96v147h-96z" fill="none" stroke="#d7bd9d" stroke-width="3" opacity=".7"/>
+  <path d="M302 174v20M338 174v20" stroke="#514233" stroke-width="8" stroke-linecap="round"/>
+  <path d="M198 279h244v39H198z" fill="#876448" stroke="#614631" stroke-width="5"/><path d="M208 289h224M208 307h224" stroke="#d0b493" stroke-width="3" opacity=".55"/>
+  <path d="M205 332v18M435 332v18" stroke="#614631" stroke-width="12" stroke-linecap="round"/>
+  <text x="320" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" letter-spacing="3" fill="#756351">WARDROBE · PREVIEW UNAVAILABLE</text>
+</svg>

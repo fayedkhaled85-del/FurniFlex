@@ -1,0 +1,35 @@
+# Local secrets and environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Runtime data and user uploads
+/uploads/**
+!/uploads/.htaccess
+/storage/**
+!/storage/.htaccess
+logs/
+*.log
+
+# Database exports and local backups
+*.sql.gz
+*.dump
+*.bak
+*.backup
+
+# Delivery archives and container images
+*.zip
+*.tar
+*.tar.gz
+*.tar.xz
+*.7z
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="t d">
+  <title id="t">Coffee table placeholder</title><desc id="d">Neutral illustration of a rounded wooden coffee table with four legs and a lower shelf.</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#f5efe6"/><stop offset="1" stop-color="#e9dfd2"/></linearGradient><linearGradient id="wood" x2="0" y2="1"><stop stop-color="#a87850"/><stop offset="1" stop-color="#765039"/></linearGradient></defs>
+  <rect width="640" height="420" rx="28" fill="url(#bg)"/><ellipse cx="320" cy="337" rx="196" ry="20" fill="#6f5742" opacity=".14"/>
+  <path d="M205 252h230l-19 84H224z" fill="#704c34"/><path d="M210 270h220l-8 35H218z" fill="#bc946a" stroke="#704c34" stroke-width="7"/>
+  <path d="M206 201 231 201l-15 120-24 6zM410 201h25l20 126-24-6zM242 211h22l-5 119-23 7zM376 211h22l18 126-24-7z" fill="#68462f"/>
+  <path d="M128 150q0-20 25-20h334q25 0 25 20v68q0 22-25 22H153q-25 0-25-22z" fill="url(#wood)" stroke="#65452f" stroke-width="8"/>
+  <path d="M158 160h324M148 180h344" stroke="#d4af87" stroke-width="4" opacity=".45"/>
+  <text x="320" y="385" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" letter-spacing="3" fill="#756351">COFFEE TABLE · PREVIEW UNAVAILABLE</text>
+</svg>

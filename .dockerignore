@@ -1,0 +1,12 @@
+*
+!index.php
+!includes/
+!includes/**
+!assets/
+!assets/**
+!deploy/
+!deploy/**
+!uploads/
+!uploads/**
+!storage/
+!storage/**
