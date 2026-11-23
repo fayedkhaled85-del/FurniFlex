@@ -1,59 +1,67 @@
 # FurniFlex
 
-FurniFlex is a PHP and MariaDB furniture commerce application. Customers can browse and customize catalog furniture or submit made-to-order commissions. Administrators manage the catalog, orders, quotations, and production workflow; manufacturers review and update assigned work.
+FurniFlex is an academic furniture commerce application. Customers can compare six products, configure individual parts in 3D, obtain recommendations and order a configured piece. Separate customer, administrator and manufacturer dashboards support made-to-order work through quotation, production, quality control and simulated delivery.
 
-## Features
+## Architecture
+Apache or the PHP development server runs index.php. The includes directory contains PDO persistence, authentication, pricing, recommendation ranking and production transitions. MariaDB stores catalog definitions, carts, configuration snapshots, quotations, orders and tracking history. The browser uses Bootstrap, JavaScript and local Three.js modules. assets/models and assets/textures supply the geometry and finishes. A separate Python process reads frozen JSON model artifacts from ai-service/artifacts. No Python training job is needed at startup.
 
-- Product catalog, cart, checkout, and order tracking
-- Custom furniture requests with quotations and production status
-- Browser-based 3D customization using local Three.js models and textures
-- Role-aware PHP workflows backed by MariaDB
-- Docker Compose setup for local development
+## Local installation (Windows PowerShell)
+Install Git, PHP 8 with PDO MySQL, mbstring and fileinfo (XAMPP provides these), MariaDB and Python 3.14. Start MariaDB. From a terminal:
+~~~powershell
+git clone https://github.com/fayedkhaled85-del/FurniFlex.git
+cd FurniFlex
+# During review, select the publication branch
+git switch publication/academic-source-20261123
+$env:DB_HOST='127.0.0.1'
+$env:DB_PORT='3307'
+$env:DB_NAME='furniflex_academic'
+$env:DB_USER=Read-Host 'Local MariaDB user'
+$env:DB_PASSWORD=[System.Net.NetworkCredential]::new('',(Read-Host 'Database password' -AsSecureString)).Password
+$mysql='C:\xampp\mysql\bin\mysql.exe'
+& $mysql -h $env:DB_HOST -P $env:DB_PORT -u $env:DB_USER -p -e "CREATE DATABASE furniflex_academic CHARACTER SET utf8mb4"
+& $mysql -h $env:DB_HOST -P $env:DB_PORT -u $env:DB_USER -p furniflex_academic -e "source FurniFlex-Schema.sql"
+& $mysql -h $env:DB_HOST -P $env:DB_PORT -u $env:DB_USER -p furniflex_academic -e "source database/catalog.sql"
+~~~
+Initialize only a **new, empty database**. Stop if CREATE DATABASE fails. The schema includes migrations through 023. Historical scripts in database/migrations must not be reapplied to this snapshot. The seed contains catalog and reference data only. Register fresh accounts via the UI. For a local staff demonstration a database administrator can promote dedicated registered accounts by setting users.role to admin or manufacturer for the verified new user ID.
 
-Payment and shipping are simulated. The application does not process payments or book carriers.
+For local development, run the following from the same terminal. Use Apache for hosted deployment because PHP's development server does not enforce .htaccess. The publication includes a development router blocking private directories.
+~~~powershell
+C:\xampp\php\php.exe -S 127.0.0.1:8080 deploy/local-router.php
+~~~
+Open http://127.0.0.1:8080/. In a second terminal from the repository root:
+~~~powershell
+py -3.14 -m venv "$env:LOCALAPPDATA\FurniFlexAdvisor"
+$python="$env:LOCALAPPDATA\FurniFlexAdvisor\Scripts\python.exe"
+& $python -m pip install -r ai-service/requirements.txt
+& $python -B ai-service/serve.py
+~~~
+Check the inference service with **Invoke-RestMethod http://127.0.0.1:8765/health**. Sign in as a customer and search for “table” with a starting-price budget of $300–500. The classifier guides retrieval; PHP applies availability, dimension and budget rules against the database. Milo Coffee Table is eligible at its starting price. Customization may increase the final price. A prior independently labeled academic ranking experiment reported NDCG@3 of 0.773 versus 0.931 on 17 answerable queries. This measures ranked relevance on that sample; real-customer performance has not been established.
 
-## Technology
+## Docker alternative
+With Docker Desktop running Linux containers, from the repository root:
+~~~powershell
+.\deploy\New-Environment.ps1
+docker compose up -d --build
+docker compose ps
+docker compose logs advisor
+~~~
+Open http://localhost:8080/. The database initializes schema then catalog on first startup. The app uses the db service on port 3306; PHP reaches the private Advisor service through Compose DNS. Named volumes preserve database, uploads and storage. Use **docker compose stop** between sessions and **docker compose start** to resume. Building requires access to the base images and Python packages.
 
-- PHP 8.5, Apache, and PDO
-- MariaDB 10.11
-- HTML, CSS, and JavaScript
-- Three.js with GLB models
-- Docker Compose
+## Demonstration
+1. Customer: Shop → Product Details → Customize. Select a component, adjust its supported dimensions, material or HEX color. Reset View changes the camera. Add the piece to the cart, check out and inspect tracking. PHP validates prices and stores the configuration snapshot.
+2. Bespoke furniture: submit a customer request. As Admin, assign it for technical review. As the assigned Manufacturer, submit feasibility feedback. As Admin, issue a quotation. The customer accepts to create the order.
+3. Production: Admin assigns a manufacturer, who accepts and completes production. Admin can request rework or approve QC, then record shipping and delivery. The customer confirms receipt.
+4. Advisor: try a specific product, a broad request and an impossible budget. Follow recommendations into product details or customization.
 
-## Repository contents
+## Tests and troubleshooting
+Run **C:\xampp\php\php.exe -l index.php**, **node --check assets/js/advisor.js**, and the health check above. Visit the six configurators with product IDs 1, 2, 3, 4, 5 and 8. For database errors check the service port and the environment inherited by PHP. Empty catalog pages usually indicate a missing catalog import. For preview failures check WebGL support and local GLB requests. Advisor outages affect recommendations; check port 8765, pinned Python packages and PHP allow_url_fopen. Give Apache write access to uploads and storage only as needed. Bootstrap presentation may require network access. Payment and shipment events are simulated; the repository contains no real accounts, customer records or mail credentials.
 
-- `index.php`, `includes/` — application routes and shared services
-- `assets/` — frontend code, vendor libraries, product models, and textures
-- `FurniFlex-Schema.sql` — empty database schema used on first initialization
-- `database/migrations/` — historical schema and catalog migrations
-- `deploy/` — Apache configuration, health check, and environment helper
-- `compose.yaml`, `Dockerfile` — local container setup
+## Design and credits
+[Editable FurniFlex design](https://www.figma.com/design/tQubjch63xu9jFgwMgRlMP) · [Home prototype](https://www.figma.com/proto/tQubjch63xu9jFgwMgRlMP/FurniFlex?node-id=6-5656&starting-point-node-id=6%3A5656). Access depends on the Figma file permissions.
 
-The delivery database dump is not included. The schema file contains table definitions only: it has no user accounts, password hashes, reset tokens, customer records, orders, or demo transactions. A fresh database therefore has no seeded catalog or staff users. Use approved project data through your team's private process if you need populated records.
-
-## Requirements
-
-- Windows 10/11 with Docker Desktop and Linux containers, or a compatible Docker Engine with Compose v2
-- Git (optional, for cloning)
-
-## Run locally
-
-1. Clone or download this repository into a new folder. Do not place it over another FurniFlex installation.
-2. Copy `.env.example` to `.env` and set unique values for `DB_PASSWORD` and `DB_ROOT_PASSWORD`.
-3. From the repository folder, run:
-
-   ```powershell
-   docker compose up -d --build
-   ```
-
-4. Open [http://localhost:8080](http://localhost:8080).
-5. Stop containers with `docker compose stop`. This keeps the database volume. Do not use `docker compose down --volumes` if you want to retain local database data.
-
-Docker Compose derives its project name from the repository folder. Use a fresh folder for this checkout so its containers and volumes stay separate from other FurniFlex installations.
-
-## Configuration and data
-
-`.env` contains local database passwords and is ignored by Git. Never commit `.env`, database backups, uploaded files, logs, or real user data. The first database initialization imports `FurniFlex-Schema.sql`; MariaDB only imports initialization files when creating a new data volume. Changing the schema file does not modify an existing database volume.
-
-
-
+Three.js ships with its [MIT notice](assets/js/THREE-LICENSE.txt). [Product visual provenance](assets/images/PRODUCT_VISUAL_SOURCES.md) and [training-data provenance](ai-service/data/NOTICE.md) are included. The full training extract is excluded. The wardrobe is a project asset. The project’s asset evaluation records the following active Innerscene models as CC0:
+- <https://www.innerscene.com/tools/library/3d-parts/boxwell-tuxedo-sofa-defac53d>
+- <https://www.innerscene.com/tools/library/3d-parts/cove-122-walnut-coffee-table-54d12f31>
+- <https://www.innerscene.com/tools/library/3d-parts/linea-140-walnut-writing-desk-c94a30dc>
+- <https://www.innerscene.com/tools/library/3d-parts/spindle-spindle-frame-bed-e3b52566>
+- <https://www.innerscene.com/tools/library/3d-parts/wingfold-butterfly-leaf-dining-table-114f0a59>
