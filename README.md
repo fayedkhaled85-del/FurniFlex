@@ -56,12 +56,6 @@ Open http://localhost:8080/. The database initializes schema then catalog on fir
 ## Tests and troubleshooting
 Run **C:\xampp\php\php.exe -l index.php**, **node --check assets/js/advisor.js**, and the health check above. Visit the six configurators with product IDs 1, 2, 3, 4, 5 and 8. For database errors check the service port and the environment inherited by PHP. Empty catalog pages usually indicate a missing catalog import. For preview failures check WebGL support and local GLB requests. Advisor outages affect recommendations; check port 8765, pinned Python packages and PHP allow_url_fopen. Give Apache write access to uploads and storage only as needed. Bootstrap presentation may require network access. Payment and shipment events are simulated; the repository contains no real accounts, customer records or mail credentials.
 
-## Design and credits
-[Editable FurniFlex design](https://www.figma.com/design/tQubjch63xu9jFgwMgRlMP) · [Home prototype](https://www.figma.com/proto/tQubjch63xu9jFgwMgRlMP/FurniFlex?node-id=6-5656&starting-point-node-id=6%3A5656). Access depends on the Figma file permissions.
 
-Three.js ships with its [MIT notice](assets/js/THREE-LICENSE.txt). [Product visual provenance](assets/images/PRODUCT_VISUAL_SOURCES.md) and [training-data provenance](ai-service/data/NOTICE.md) are included. The full training extract is excluded. The wardrobe is a project asset. The project’s asset evaluation records the following active Innerscene models as CC0:
-- <https://www.innerscene.com/tools/library/3d-parts/boxwell-tuxedo-sofa-defac53d>
-- <https://www.innerscene.com/tools/library/3d-parts/cove-122-walnut-coffee-table-54d12f31>
-- <https://www.innerscene.com/tools/library/3d-parts/linea-140-walnut-writing-desk-c94a30dc>
 - <https://www.innerscene.com/tools/library/3d-parts/spindle-spindle-frame-bed-e3b52566>
 - <https://www.innerscene.com/tools/library/3d-parts/wingfold-butterfly-leaf-dining-table-114f0a59>
