@@ -45,7 +45,7 @@ docker compose up -d --build
 docker compose ps
 docker compose logs advisor
 ~~~
-Open http://localhost:8080/. The database initializes schema then catalog on first startup. The app uses the db service on port 3306; the Advisor shares the app network namespace for its loopback inference endpoint. Named volumes preserve database, uploads and storage. Use **docker compose stop** between sessions and **docker compose start** to resume. Building requires access to the base images and Python packages.
+Open http://localhost:8080/. The database initializes schema then catalog on first startup. The app uses the db service on port 3306; PHP reaches the private Advisor service through Compose DNS. Named volumes preserve database, uploads and storage. Use **docker compose stop** between sessions and **docker compose start** to resume. Building requires access to the base images and Python packages.
 
 ## Demonstration
 1. Customer: Shop → Product Details → Customize. Select a component, adjust its supported dimensions, material or HEX color. Reset View changes the camera. Add the piece to the cart, check out and inspect tracking. PHP validates prices and stores the configuration snapshot.

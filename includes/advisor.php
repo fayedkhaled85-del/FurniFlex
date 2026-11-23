@@ -60,7 +60,7 @@ function advisor_predict(string $text): array {
         'follow_location' => 0,
         'ignore_errors' => true,
     ]]);
-    $stream = @fopen('http://127.0.0.1:8765/predict', 'rb', false, $context);
+    $stream = @fopen((getenv('ADVISOR_ENDPOINT') ?: 'http://127.0.0.1:8765/predict'), 'rb', false, $context);
     if (!$stream) throw new RuntimeException('The AI service is unavailable. You can still browse the Shop.');
     try {
         $headers = stream_get_meta_data($stream)['wrapper_data'] ?? [];

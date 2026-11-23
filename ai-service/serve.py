@@ -1,4 +1,5 @@
 """Local, data-only inference. The PHP application owns authorization and ranking."""
+import os
 import json
 import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -116,4 +117,4 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    ThreadingHTTPServer(("127.0.0.1", 8765), Handler).serve_forever()
+    ThreadingHTTPServer((os.environ.get("ADVISOR_BIND", "127.0.0.1"), 8765), Handler).serve_forever()

@@ -87,7 +87,7 @@ async function renderPreview(host) {
     resizeObserver.observe(host);
     fit();
 
-    const gltf = await loader.loadAsync('/FurniFlex/' + url);
+    const gltf = await loader.loadAsync(new URL(url,document.baseURI).href);
     const model = new THREE.Group();
     const source = gltf.scene;
     const productId = Number(host.dataset.productId);

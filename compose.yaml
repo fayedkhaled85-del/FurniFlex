@@ -30,6 +30,7 @@ services:
       db:
         condition: service_healthy
     environment:
+      ADVISOR_ENDPOINT: http://advisor:8765/predict
       DB_HOST: db
       DB_NAME: ${DB_NAME:-furniflex_db}
       DB_USER: ${DB_USER:-furniflex}
@@ -47,9 +48,13 @@ services:
       retries: 20
   advisor:
     build: ./ai-service
-    network_mode: service:app
-    depends_on:
-      - app
+    environment:
+      ADVISOR_BIND: 0.0.0.0
+    healthcheck:
+      test: ["CMD","python","-c","import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/health',timeout=3)"]
+      interval: 10s
+      timeout: 4s
+      retries: 20
 volumes:
   data:
   uploads:
