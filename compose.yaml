@@ -16,6 +16,7 @@ services:
         read_only: true
         bind:
           create_host_path: false
+      - ./database/catalog.sql:/docker-entrypoint-initdb.d/02-catalog.sql:ro
     healthcheck:
       test: ["CMD","healthcheck.sh","--connect","--innodb_initialized"]
       interval: 5s
@@ -44,6 +45,11 @@ services:
       interval: 10s
       timeout: 8s
       retries: 20
+  advisor:
+    build: ./ai-service
+    network_mode: service:app
+    depends_on:
+      - app
 volumes:
   data:
   uploads:

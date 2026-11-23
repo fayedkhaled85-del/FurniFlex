@@ -1,0 +1,55 @@
+/* Loaded only by the Advisor. Keep all presentation within its page root. */
+.ff-advisor { color:#292524; padding-bottom:1.5rem }
+.ff-advisor .advisor-intro { display:flex; align-items:center; gap:1rem; margin:0 0 1.6rem; padding:.75rem 0 1.4rem; border-bottom:1px solid #dfd5ca }
+.ff-advisor .advisor-mark { display:grid; place-items:center; flex:none; width:54px; height:54px; border-radius:16px; background:#5c4033; color:#fff6ea; font-size:1.65rem }
+.ff-advisor h1 { margin:0; font-size:clamp(1.85rem,3.4vw,3rem); line-height:1.1; letter-spacing:-.045em }
+.ff-advisor .advisor-intro p { margin:.35rem 0 0; color:#665c55 }
+.ff-advisor .advisor-columns { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,3fr); align-items:start; gap:clamp(1rem,2vw,2rem) }
+.ff-advisor .advisor-panel { min-width:0; padding:clamp(1rem,2.2vw,2rem); background:white; border:1px solid #e8dfd5; border-radius:18px; box-shadow:0 8px 26px #35241b09 }
+.ff-advisor h2 { margin:0 0 1.25rem; font-size:clamp(1.25rem,2vw,1.55rem); letter-spacing:-.025em }
+.ff-advisor h3 { font-size:1.25rem; letter-spacing:-.015em }
+.ff-advisor .form-label { font-weight:600 }
+.ff-advisor textarea { resize:vertical; min-height:6rem }
+.ff-advisor .form-control,.ff-advisor .form-select { border-color:#d6ccc2; color:#342d28 }
+.ff-advisor .advisor-chip { background:#faf7f3; border:1px solid #e0d3c5; border-radius:24px; color:#543d31; padding:.45rem .8rem; font:inherit; font-size:.86rem; font-weight:600; min-height:44px }
+.ff-advisor .advisor-chip:hover { background:#efe6db; border-color:#bca897 }
+.ff-advisor .advisor-chip[aria-pressed=true] { background:#5c4033; color:white; border-color:#5c4033 }
+.ff-advisor :is(button,a,summary,input,textarea,select):focus-visible { outline:3px solid #896038; outline-offset:2px }
+.ff-advisor details { border-block:1px solid #e6dcd1; padding:.35rem 0 }
+.ff-advisor summary { display:flex; justify-content:space-between; align-items:center; min-height:46px; font-weight:650; color:#49372c; list-style:none }
+.ff-advisor summary::-webkit-details-marker { display:none }
+.ff-advisor summary span i { margin-right:.35rem }
+.ff-advisor summary > i { transition:transform .16s ease }
+.ff-advisor details[open] summary > i { transform:rotate(180deg) }
+.ff-advisor fieldset + fieldset { border-top:1px solid #eee6dc; padding-top:.85rem }
+.ff-advisor fieldset legend { font-weight:650 }
+.ff-advisor .advisor-actions { display:flex; flex-wrap:wrap; gap:.65rem; align-items:center }
+.ff-advisor .btn,.ff-advisor #advisor-reset { min-height:44px }
+.ff-advisor .advisor-actions .btn,.ff-advisor #advisor-reset { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:9px }
+.ff-advisor #advisor-reset { padding:0 .5rem; color:#5c4033; text-decoration:none; font-size:.9rem; font-weight:600 }
+.ff-advisor #advisor-reset:hover { text-decoration:underline }
+.ff-advisor #advisor-filter-summary { display:block; color:#59463b; font-weight:600 }
+.ff-advisor .advisor-note,.ff-advisor .advisor-message p,.ff-advisor #advisor-empty p { color:#655c55; margin:.3rem 0 1rem }
+.ff-advisor .advisor-note { font-size:.86rem }
+.ff-advisor #advisor-empty { background:#f8f4ee; border-radius:12px; overflow:hidden }
+.ff-advisor .advisor-room { width:100%; height:clamp(130px,17vw,240px); object-fit:cover; object-position:center 70%; display:block }
+.ff-advisor #advisor-empty > div,.ff-advisor .advisor-message { padding:clamp(1rem,2vw,1.6rem) }
+.ff-advisor #advisor-empty p,.ff-advisor .advisor-message p { margin-bottom:0 }
+.ff-advisor .advisor-message { border-radius:12px; background:#faf6ef; overflow-wrap:anywhere }
+.ff-advisor .advisor-message > i { display:inline-block; margin-bottom:.6rem; font-size:1.4rem; color:#77573e }
+.ff-advisor .advisor-message a { display:inline-flex; align-items:center; min-height:44px; color:#5c4033 }
+.ff-advisor #advisor-loading { padding:2rem 1rem; color:#5c4033; background:#faf6ef; border-radius:12px }
+.ff-advisor .is-loading :is(#advisor-outcome,#advisor-empty) { display:none }
+.ff-advisor .advisor-products { display:grid; gap:1rem }
+.ff-advisor .advisor-result { overflow:hidden; border:1px solid #e9dfd3; border-radius:12px }
+.ff-advisor .advisor-product-visual { background:#f6efe7 }
+.ff-advisor .advisor-product-visual .model-preview-card { height:clamp(165px,18vw,240px); border-radius:0!important }
+.ff-advisor .advisor-product-copy { padding:1rem 1.15rem }
+.ff-advisor .advisor-product-copy h3 { margin:.25rem 0 }
+.ff-advisor .advisor-product-copy p,.ff-advisor .advisor-product-copy ul { margin-bottom:.65rem }
+.ff-advisor .advisor-product-copy ul { padding-left:1.2rem }
+.ff-advisor .advisor-product-copy a { display:inline-flex; align-items:center }
+@media(max-width:899px) { .ff-advisor .advisor-columns { grid-template-columns:minmax(0,1fr) } }
+@media(max-width:575px) { .ff-advisor .advisor-intro { align-items:flex-start; gap:.75rem } .ff-advisor .advisor-mark { width:42px;height:42px;border-radius:12px } }
+@media(prefers-reduced-motion:reduce) { .ff-advisor summary > i,.ff-advisor .btn,.ff-advisor .spinner-border { transition:none; animation:none } }
+.ff-advisor #advisor-submit:disabled { background-color:#5c4033; border-color:#5c4033; color:white; opacity:.8 }

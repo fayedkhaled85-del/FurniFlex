@@ -1,4 +1,4 @@
-SET NAMES utf8mb4;SET NAMES utf8mb4;
+SET NAMES utf8mb4; SET FOREIGN_KEY_CHECKS=0;
 
 
 
@@ -12,7 +12,7 @@ CREATE TABLE `cart_item_component_snapshots` (
   PRIMARY KEY (`snapshot_id`),
   KEY `fk_cart_component_item` (`cart_item_id`),
   CONSTRAINT `fk_cart_component_item` FOREIGN KEY (`cart_item_id`) REFERENCES `cart_items` (`cart_item_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=723 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `cart_item_customizations` (
   `cart_item_customization_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -25,7 +25,7 @@ CREATE TABLE `cart_item_customizations` (
   KEY `option_id` (`option_id`),
   CONSTRAINT `cart_item_customizations_ibfk_1` FOREIGN KEY (`cart_item_id`) REFERENCES `cart_items` (`cart_item_id`) ON DELETE CASCADE,
   CONSTRAINT `cart_item_customizations_ibfk_2` FOREIGN KEY (`option_id`) REFERENCES `customization_options` (`option_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `cart_items` (
   `cart_item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -39,7 +39,7 @@ CREATE TABLE `cart_items` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`cart_id`) ON DELETE CASCADE,
   CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `carts` (
   `cart_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -50,7 +50,7 @@ CREATE TABLE `carts` (
   PRIMARY KEY (`cart_id`),
   KEY `user_id` (`user_id`,`cart_status`),
   CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `categories` (
   `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -59,7 +59,7 @@ CREATE TABLE `categories` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `category_name` (`category_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `color_palette_options` (
   `color_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -71,7 +71,7 @@ CREATE TABLE `color_palette_options` (
   PRIMARY KEY (`color_id`),
   UNIQUE KEY `uq_palette_color` (`color_name`,`color_hex`),
   CONSTRAINT `CONSTRAINT_1` CHECK (`color_hex` regexp '^#[0-9a-fA-F]{6}$')
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `custom_requests` (
   `request_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -95,7 +95,7 @@ CREATE TABLE `custom_requests` (
   KEY `assigned_manufacturer_id` (`assigned_manufacturer_id`),
   CONSTRAINT `custom_requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `custom_requests_ibfk_2` FOREIGN KEY (`assigned_manufacturer_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `customization_options` (
   `option_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -110,7 +110,7 @@ CREATE TABLE `customization_options` (
   PRIMARY KEY (`option_id`),
   KEY `type_id` (`type_id`),
   CONSTRAINT `customization_options_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `customization_types` (`type_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `customization_types` (
   `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -118,7 +118,7 @@ CREATE TABLE `customization_types` (
   `description` text DEFAULT NULL,
   PRIMARY KEY (`type_id`),
   UNIQUE KEY `type_name` (`type_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `manufacturer_reviews` (
   `review_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -135,7 +135,7 @@ CREATE TABLE `manufacturer_reviews` (
   KEY `manufacturer_id` (`manufacturer_id`),
   CONSTRAINT `manufacturer_reviews_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `custom_requests` (`request_id`),
   CONSTRAINT `manufacturer_reviews_ibfk_2` FOREIGN KEY (`manufacturer_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `material_catalog` (
   `material_key` varchar(32) NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE `notifications` (
   PRIMARY KEY (`notification_id`),
   KEY `user_id` (`user_id`,`is_read`,`created_at`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `order_item_component_snapshots` (
   `snapshot_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -186,7 +186,7 @@ CREATE TABLE `order_item_component_snapshots` (
   PRIMARY KEY (`snapshot_id`),
   KEY `fk_order_component_item` (`order_item_id`),
   CONSTRAINT `fk_order_component_item` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`order_item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `order_item_customizations` (
   `order_item_customization_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -199,7 +199,7 @@ CREATE TABLE `order_item_customizations` (
   KEY `option_id` (`option_id`),
   CONSTRAINT `order_item_customizations_ibfk_1` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`order_item_id`),
   CONSTRAINT `order_item_customizations_ibfk_2` FOREIGN KEY (`option_id`) REFERENCES `customization_options` (`option_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `order_items` (
   `order_item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -215,7 +215,7 @@ CREATE TABLE `order_items` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `order_status_history` (
   `history_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -229,7 +229,7 @@ CREATE TABLE `order_status_history` (
   KEY `updated_by` (`updated_by`),
   CONSTRAINT `order_status_history_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   CONSTRAINT `order_status_history_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `orders` (
   `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -243,7 +243,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`order_id`),
   KEY `user_id` (`user_id`,`order_date`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `password_reset_tokens` (
   `reset_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -256,7 +256,7 @@ CREATE TABLE `password_reset_tokens` (
   UNIQUE KEY `token_hash` (`token_hash`),
   KEY `user_id` (`user_id`,`expires_at`),
   CONSTRAINT `fk_reset_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `payments` (
   `payment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -269,7 +269,7 @@ CREATE TABLE `payments` (
   PRIMARY KEY (`payment_id`),
   KEY `order_id` (`order_id`),
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `product_component_options` (
   `component_option_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -283,7 +283,7 @@ CREATE TABLE `product_component_options` (
   PRIMARY KEY (`component_option_id`),
   UNIQUE KEY `uq_component_option` (`component_id`,`option_type`,`option_name`),
   CONSTRAINT `fk_component_option_component` FOREIGN KEY (`component_id`) REFERENCES `product_components` (`component_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1931 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `product_components` (
   `component_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -334,7 +334,7 @@ CREATE TABLE `product_components` (
   CONSTRAINT `CONSTRAINT_2` CHECK (`max_depth_cm` >= `min_depth_cm` and `default_depth_cm` between `min_depth_cm` and `max_depth_cm`),
   CONSTRAINT `CONSTRAINT_3` CHECK (`max_height_cm` >= `min_height_cm` and `default_height_cm` between `min_height_cm` and `max_height_cm`),
   CONSTRAINT `CONSTRAINT_4` CHECK (`max_quantity` >= `min_quantity` and `default_quantity` between `min_quantity` and `max_quantity`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `product_customization_options` (
   `product_id` int(10) unsigned NOT NULL,
@@ -356,7 +356,7 @@ CREATE TABLE `product_dimension_price_ranges` (
   KEY `product_id` (`product_id`,`dimension_name`,`min_cm`,`max_cm`),
   CONSTRAINT `fk_dimension_range_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
   CONSTRAINT `CONSTRAINT_1` CHECK (`max_cm` > `min_cm` and `additional_cost` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `product_dimension_rules` (
   `product_id` int(10) unsigned NOT NULL,
@@ -382,7 +382,7 @@ CREATE TABLE `product_images` (
   PRIMARY KEY (`image_id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `production_orders` (
   `order_id` int(10) unsigned NOT NULL,
@@ -423,7 +423,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`product_id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `fk_product_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `quotations` (
   `quotation_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -441,7 +441,7 @@ CREATE TABLE `quotations` (
   KEY `admin_id` (`admin_id`),
   CONSTRAINT `quotations_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `custom_requests` (`request_id`),
   CONSTRAINT `quotations_ibfk_2` FOREIGN KEY (`admin_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `request_images` (
   `request_image_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -451,7 +451,7 @@ CREATE TABLE `request_images` (
   PRIMARY KEY (`request_image_id`),
   KEY `request_id` (`request_id`),
   CONSTRAINT `request_images_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `custom_requests` (`request_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `users` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -466,5 +466,7 @@ CREATE TABLE `users` (
   `auth_version` int(10) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
+SET FOREIGN_KEY_CHECKS=1;
